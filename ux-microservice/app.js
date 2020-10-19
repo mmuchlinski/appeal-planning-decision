@@ -12,7 +12,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use("/public", express.static(path.join(__dirname, "/public")));
 app.use(
   "/node_modules/govuk-frontend",
   express.static(path.join(__dirname, "/node_modules/govuk-frontend"))
@@ -21,6 +21,8 @@ app.use(
 app.use("/", indexRouter);
 app.set("views", __dirname + "/views");
 app.set("view engine", "njk");
+
+app.locals.asset_path = "/public/";
 
 const isDev = app.get("env") === "development";
 
